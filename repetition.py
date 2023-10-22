@@ -1,25 +1,26 @@
 class Solution:
     def __init__(self, input: str):
         self.input = input
+        self.size = len(input)
     
     def largest(self) -> int:
         lst = []
-        temp = self.input[0]
-        rest = self.input[1:]
+        t = 1
 
-        for s in rest:
-            if temp[0] == s:
-                temp = temp + s
+        for i in range(0, self.size - 1):
+            if self.input[i] == self.input[i + 1]:
+                t = t + 1
             else:
-                lst.append(temp)
-                temp = s
+                lst.append(t)
+                t = 1
         
-        lst = list(map(len, lst))
+        lst.sort()
         return lst.pop()
 
+from sys import stdin
+
 def main():
-    sequence = input().strip()
-    sequence = [ch for ch in sequence]
+    sequence = stdin.readline()
     o = Solution(sequence)
     print(o.largest())
 
